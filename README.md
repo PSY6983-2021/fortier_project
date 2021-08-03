@@ -23,3 +23,11 @@ But with these repeated test comes important amount of data to process, and in o
 Another task that could be interesting to do could be to try and use these test data to try and fingerprint the participant based on their results to the tests.
 Since every person's hearing is unique and is affected by the individual auditory experience, it could be interesting to try that kind of machine learning classification task.
 
+## Tools
+The plan is to use the following tools from the BrainHack School's tutorials in this project:
+- Git and GitHub for the collaborative work and the version control of the project
+- Python scripts to execute the tasks
+- The Bash terminal environment to work on the scripts and run them.
+- Markdown to build this README.md file
+- Plotting libraries such as Matplotlib, Seaborn or Plotly
+- Machine learning libraries for the fingerprinting task
