@@ -1,10 +1,10 @@
 import pandas as pd
 
 if __name__ == "__main__":
-    url_share = "https://docs.google.com/spreadsheets/d/1UQsU6FNr7ovVjLRIMItgtYWr1zN7UHpMjfHtdGa1myc/edit#gid=0"
+    url_share = input("Please input the URL of the Google Spreadsheet data file: ")
     url_csv =  url_share.replace("/edit#gid=", "/export?format=csv&gid=")
     master_data = pd.read_csv(url_csv)
-#   master_data.to_csv("master_data_test.csv")
+    master_data.to_csv("../outputs/master_data_test.csv")
     data_graph = master_data[["Participant_ID", "Gender", "DATE",
                               "Protocol name", "Protocol condition", "Scan type",
                               "RE_250", "RE_500", "RE_1000",
@@ -22,4 +22,4 @@ if __name__ == "__main__":
                               "MTX1_R_Bin", "MTX1_R_R", "MTX_LANG_2",
                               "MTX2_L_L", "MTX2_L_Bin", "MTX2_Bin_Bin",
                               "MTX2_R_Bin", "MTX2_R_R"]]
-#   data_graph.to_csv("data_graph_test.csv")
+    data_graph.to_csv("../outputs/data_graph_test.csv")
