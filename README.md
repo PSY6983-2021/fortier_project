@@ -23,6 +23,8 @@ But with these repeated test comes important amount of data to process, and in o
 
 ![P01-Baseline 2, Bilateral.png](images/P01-Baseline_2_Bilateral.png)
 
+![P01-Matrix test FR, Condition 2 (may_2021).png](images/P01-Matrix_test_FR_Condition_2_(may_2021).png)
+
 Another task that could be interesting to do could be to try and use these test data to try and fingerprint the participant based on their results to the tests.
 Since every person's hearing is unique and is affected by the individual auditory experience, it could be interesting to try that kind of machine learning classification task.
 
