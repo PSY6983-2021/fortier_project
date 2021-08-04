@@ -20,6 +20,9 @@ Part of the auditory perception's job is to do this monitoring task.
 To do so, the participants go through different clinical tests every month to keep track of the evolution of their auditory health.
 Some of those test data, such as the pure-tone audiometry test data, are more easily interpreted when rendered into graphic displays.
 But with these repeated test comes important amount of data to process, and in order to do that efficiently, an automated graph generation pipeline might be a better option than to manually generate each of them.
+
+![P01-Baseline 2, Bilateral.png](images/"P01-Baseline 2, Bilateral.png" "Audiogram (P01\'s Baseline #2)")
+
 Another task that could be interesting to do could be to try and use these test data to try and fingerprint the participant based on their results to the tests.
 Since every person's hearing is unique and is affected by the individual auditory experience, it could be interesting to try that kind of machine learning classification task.
 
