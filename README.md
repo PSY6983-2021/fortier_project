@@ -21,7 +21,11 @@ To do so, the participants go through different clinical tests every month to ke
 Some of those test data, such as the pure-tone audiometry test data, are more easily interpreted when rendered into graphic displays.
 But with these repeated test comes important amount of data to process, and in order to do that efficiently, an automated graph generation pipeline might be a better option than to manually generate each of them.
 
+###### Exemple of audiogram
+
 ![P01-Baseline 2, Bilateral.png](images/P01-Baseline_2_Bilateral.png)
+
+###### Exemple of Matrix test results graph
 
 ![P01-Matrix test FR, Condition 2 (may_2021).png](images/P01-Matrix_test_FR_Condition_2_(may_2021).png)
 
