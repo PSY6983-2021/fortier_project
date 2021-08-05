@@ -8,7 +8,7 @@ BrainHack School 2021 project
 </a>
 
 <a href="https://github.com/eddyfortier">
-   <img src="https://avatars.githubusercontent.com/u/72314243?v=4" width="10>
+   <img src="https://avatars.githubusercontent.com/u/72314243?v=4" width="100px;" alt=""/>
    <br /><sub><b>E. Fortier</b></sub>
 </a>
 
