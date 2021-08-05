@@ -2,16 +2,24 @@
 
 BrainHack School 2021 project
 
-<a href="https://github.com/lilielkhalil">
-   <img src="https://avatars.githubusercontent.com/u/87989383?v=4?s=100" width="100px;" alt=""/>
-   <br /><sub><b>Lili El Khalil</b></sub>
-</a>
-
-
-<a href="https://github.com/eddyfortier">
-   <img src="https://avatars.githubusercontent.com/u/72314243?v=4" width="100px;" alt=""/>
-   <br /><sub><b>E. Fortier</b></sub>
-</a>
+<table>
+  <tr>
+    <td align="center">
+      <a href="https://github.com/lilielkhalil">
+        <img src="https://avatars.githubusercontent.com/u/87989383?v=4?s=100" width="100px;" alt=""/>
+        <br /><sub><b>Lili El Khalil</b></sub>
+      </a>
+      <br />
+    </td>
+    <td align="center">
+      <a href="https://github.com/eddyfortier">
+        <img src="https://avatars.githubusercontent.com/u/72314243?v=4" width="100px;" alt=""/>
+        <br /><sub><b>E. Fortier</b></sub>
+      </a>
+      <br />
+    </td>
+  </tr>
+</table>
 
 ## Lili El Khalil's personal Backgroung
 
