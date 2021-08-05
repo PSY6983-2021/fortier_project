@@ -7,6 +7,7 @@ BrainHack School 2021 project
    <br /><sub><b>Lili El Khalil</b></sub>
 </a>
 
+
 <a href="https://github.com/eddyfortier">
    <img src="https://avatars.githubusercontent.com/u/72314243?v=4" width="100px;" alt=""/>
    <br /><sub><b>E. Fortier</b></sub>
