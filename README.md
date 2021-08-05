@@ -65,7 +65,7 @@ A first task that could be interesting to do would be, in order to go through th
 
 ###### Exemple of Matrix test results graph
 
-![P01-Matrix test FR, Condition 2 (may_2021).png](images/P01-Matrix_test_FR_Condit>
+![P01-Matrix test FR, Condition 2 (may_2021).png](images/P01-Matrix_test_FR_Condition_2_(may_2021).png)
 
 A second task that could be interesting to do would be to try and use these test data to try and fingerprint the participant based on their results to the tests.
 Since every person's hearing is unique and is affected by the individual auditory experience, it could be interesting to try that kind of machine learning classification task.
