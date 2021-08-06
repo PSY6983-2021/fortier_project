@@ -87,6 +87,24 @@ The plan is to use the following tools from the BrainHack School's tutorials in 
 
 ## Data
 
+The dataset used for this project was acquired through multiple sessions with each participant between November 2018 and June 2021.
+Multiple clinical tests were performed including:
+- Otoscopic inspection of the external auditory canal and tympanic membrane
+- Tympanometry
+- Stapedial reflex test
+- Pure-tone audiometry
+    - Regular clinical frequencies range (from 250 Hz to 8 kHz)
+    - Ultra-high frequencies extended range (from 9 kHz to 20 kHz)
+- Matrix speech-in-noise perception test
+    - In the primary language of the participant: French or English (for all participants)
+    - In the second language of the participant: French or English (for 5 out of the 6 participants)
+- Otoacoustic emissions
+    - Transitory evoked otoacoustic emissions (TEOAE)
+    - Distortion product otoacoustic emissions (DPOAE) with a L1/L2 ratio of 65/55 dB SPL
+    - Growth function (DP Growth) with 2 kHz, 4 kHz and 6 kHz
+Baselines were acquired for these tests.
+Three different combinations of those test were then designed as experimental condition and randomly assigned to each of the participant in a way that they will all do each of those conditions four times over the course of a twelve months protocol.
+
 ## Deliverables
 
 By the end of The BrainHack School, we aimed to have the following:
