@@ -102,6 +102,7 @@ Multiple clinical tests were performed including:
     - Transitory evoked otoacoustic emissions (TEOAE)
     - Distortion product otoacoustic emissions (DPOAE) with a L1/L2 ratio of 65/55 dB SPL
     - Growth function (DP Growth) with 2 kHz, 4 kHz and 6 kHz
+
 Baselines were acquired for these tests.
 Three different combinations of those test were then designed as experimental condition and randomly assigned to each of the participant in a way that they will all do each of those conditions four times over the course of a twelve months protocol.
 
