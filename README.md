@@ -104,7 +104,7 @@ Multiple clinical tests were performed including:
     - Growth function (DP Growth) with 2 kHz, 4 kHz and 6 kHz
 
 Baselines were acquired for each of these tests.
-Three different combinations of those tests were then designed as experimental condition and randomly assigned to each of the participant in a way that they will all do each of those conditions four times over the course of a twelve months protocol.
+Three different combinations of those tests were then designed as experimental conditions and randomly assigned to each of the participant in a way that they will all do each of those conditions four times over the course of a twelve months protocol.
 
 ## Deliverables
 
