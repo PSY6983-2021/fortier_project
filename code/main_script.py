@@ -60,3 +60,4 @@ if __name__ == "__main__":
     #print("Je suis la balise pta")
     #data_pta.to_csv("../results/data_pta_test.csv")
 
+    of.plot_graph(data_pta, "pta", "Right")
