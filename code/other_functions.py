@@ -49,6 +49,10 @@ def plot_graph(df, test_type, ear = "Bilateral"):
                          "RE_3000", "RE_4000", "RE_6000", "RE_8000",
                          "RE_9000", "RE_10000", "RE_11200", "RE_12500",
                          "RE_14000", "RE_16000", "RE_18000", "RE_20000"]
+            x_labels = {"RE_250": 250, "RE_500": 500, "RE_1000": 1000, "RE_2000": 2000,
+                        "RE_3000": 3000, "RE_4000": 4000, "RE_6000": 6000, "RE_8000": 8000,
+                        "RE_9000": 9000, "RE_10000": 10000, "RE_11200": 11200, "RE_12500": 12500,
+                        "RE_14000": 14000, "RE_16000": 16000, "RE_18000": 18000, "RE_20000": 20000}
         elif ear == "Left":
             x_columns = ["LE_250", "LE_500", "LE_1000", "LE_2000",
                          "LE_3000", "LE_4000", "LE_6000", "LE_8000",
@@ -67,30 +71,40 @@ def plot_graph(df, test_type, ear = "Bilateral"):
             print("ERROR: the test_type value isn't valid")
 
         i = 0
-        data = df.loc[i, x_columns]
-        #print(data)
-        #data.to_csv("../results/data_test.csv")
+        data_y = df.loc[i, x_columns]
+        data_y = data_y.reset_index(drop = True)
+        data_y.columns = ["Hearing Threshold (dB HL)"]
+        print(data_y)
+        data_x = pd.DataFrame(data = [250, 500, 1000, 2000, 3000, 4000, 6000, 8000,
+                                      9000, 10000, 11200, 12500, 14000, 16000, 18000, 20000])
+        print(data_x)
+        data = data_x.append(data_y)
+        data.columns = ["Frequency (Hz)", "Hearing Threshold (dB HL)"]
+        print(data)
+        print(data.columns)
+        data.to_csv("../results/data_test.csv")
         to_drop = []
         #print(data.index)
-        for j in range (0, len(data)):
+        for j in data.index:
             #print(j)
             #print(to_drop)
             #print(data.index[j])
             #print(df[column_to_search][i])
             #print(df[column_to_search][i] == value_to_search)
             if data[j] == 130:
-                to_drop.append(data.index[j])
+                to_drop.append(j)
             else:
                 continue
-        print(to_drop)
+        #print(to_drop)
         data = data.drop(to_drop, axis = 0)
-        print(data)
+        #print(data)
         #return df.drop(to_drop, axis = 0)
 
         ID = df["Participant_ID"][i]
         name = df["Protocol name"][i]
-        title = ID + "-" + name + "(" + ear + ")"
-        fig = px.line(data, title = title)
+        title = ID + "-" + name + " (" + ear + ")"
+        #labels = {index: "Frequency (Hz)", value: "Hearing Threshold (dB HL)"}
+        fig = px.line(data, title = title, log_x = True, range_x = [100, 20000], range_y = [-20, 80])
         fig.show()
         fig.write_image("../results/" + title + ".png")
         counter =+ 1
