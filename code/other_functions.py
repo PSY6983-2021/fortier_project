@@ -11,21 +11,23 @@ def eliminate_row(df, column_to_search, value_to_search):
     -returns a dataframe where the unnecessary rows have been eliminated
     """
 
-    print(column_to_search)
-    print(value_to_search)
-    print(len(df))
+    #print(column_to_search)
+    #print(value_to_search)
+    #print(len(df))
+
     to_drop = []
 
     for i in range (0, len(df)):
         #print(i)
         #print(to_drop)
         #print(df[column_to_search][i])
-        print(df[column_to_search][i] == value_to_search)
+        #print(df[column_to_search][i] == value_to_search)
         if df[column_to_search][i] == value_to_search:
             to_drop.append(i)
         else:
             continue
     df = df.drop(to_drop, axis = 0)
+    df = df.reset_index(drop = True)
     #print(df)
     #return df.drop(to_drop, axis = 0)
     return df
