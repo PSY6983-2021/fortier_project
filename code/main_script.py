@@ -81,7 +81,11 @@ if __name__ == "__main__":
 
     # Pure-tone audiometry
     data_pta = of.eliminate_row(data_pta, "Protocol condition", "Condition 3A (OAEs right before the scan)")
+    data_pta_L = of.eliminate_row(data_pta_L, "Protocol condition", "Condition 3A (OAEs right before the scan)")
+    data_pta_R = of.eliminate_row(data_pta_R, "Protocol condition", "Condition 3A (OAEs right before the scan)")
     #print(data_pta)
+    #print(data_pta_L)
+    #print(data_pta_R)
     #print("Je suis la balise pta")
     #data_pta.to_csv("../results/data_pta_test.csv")
 
@@ -91,7 +95,9 @@ if __name__ == "__main__":
     #print(data_pta_L)
 
     for i in range (0, len(data_pta_L)):
-        action_i = of.plot_pta_L(data_pta_L[i])
+        print(i)
+        #print(data_pta_L.loc[[i]])
+        action_i = of.plot_pta_L(data_pta_L.loc[[i]])
         if action_i == True:
             counter =+ 1
         else:
@@ -118,7 +124,7 @@ if __name__ == "__main__":
         else:
             continue
 
-    if counter <= 1:
-        print(counter, ".html file was saved.")
-    else:
-        print(counter, ".html files were saved.")
+#   if counter <= 1:
+#       print(counter, ".html file was saved.")
+#   else:
+#       print(counter, ".html files were saved.")
