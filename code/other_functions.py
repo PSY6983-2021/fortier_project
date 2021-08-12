@@ -3,6 +3,7 @@ import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
 
+
 def eliminate_row(df, column_to_search, value_to_search):
     """
     INPUTS
@@ -13,76 +14,30 @@ def eliminate_row(df, column_to_search, value_to_search):
     -returns a dataframe where the unnecessary rows have been eliminated
     """
 
-    #print(column_to_search)
-    #print(value_to_search)
-    #print(len(df))
-
     to_drop = []
 
     for i in range (0, len(df)):
-        #print(i)
-        #print(to_drop)
-        #print(df[column_to_search][i])
-        #print(df[column_to_search][i] == value_to_search)
         if df[column_to_search][i] == value_to_search:
             to_drop.append(i)
         else:
             continue
     df = df.drop(to_drop, axis = 0)
     df = df.reset_index(drop = True)
-    #print(df)
-    #return df.drop(to_drop, axis = 0)
     return df
 
-"""
-def make_sub_df(df, columns, row, test_type):
-    pta_x = [250, 500, 1000, 2000,
-             3000, 4000, 6000, 8000,
-             9000, 10000, 11200, 12500,
-             14000, 16000, 18000, 20000]
-    mtx_x = ["Noise: Left, Speech: Left",
-             "Noise: Binaural, Speech: Left",
-             "Noise: Binaural, Speech: Binaural",
-             "Noise: Binaural, Speech: Right",
-             "Noise: Right, Speech: Right"]
-    #print(pta_x)
-    #print(mtx_x)
-    if test_type == "pta":
-        x = pta_x
-    elif test_type == "mtx":
-        x = mtx_x
-"""
 
 def return_130(df, to_search):
+
     index_value = df.index[0]
     to_drop = []
-    #print(column_names)
-    #print("index = ", index_value)
-    #print(len(df))
 
     for i in to_search:
-        #print(i)
-        #print(df[i])
-        #print(df[i][index_value])
-        #print(to_drop)
-        #print(df[column_to_search][i])
-        #print(df[column_to_search][i] == value_to_search)
         if df[i][index_value] == 130:
-            #print(True)
             to_drop.append(to_search.index(i))
         else:
-            #print(False)
             continue
-
-    #print(to_drop)
-    #print(df)
-    #to_search_int = to_search_int.drop(to_drop, axis = 1)
     return to_drop
 
-#def drop_130(data, list_130):
-    #for j in list_130:
-        #print(.columns[j])
-        #df = df.drop(df.columns(j), axis = 1)
 
 def plot_pta_L(df):
     """
@@ -148,6 +103,4 @@ def plot_pta_L(df):
                       yaxis_zerolinecolor = "black")
     fig.show()
 
-
-
-    #fig.write_image("../results/" + title + ".png")
+    save_graph(fig, df)
