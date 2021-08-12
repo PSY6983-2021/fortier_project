@@ -20,8 +20,10 @@ def eliminate_row(df, column_to_search, value_to_search):
             to_drop.append(i)
         else:
             continue
+
     df = df.drop(to_drop, axis = 0)
     df = df.reset_index(drop = True)
+
     return df
 
 
@@ -36,14 +38,20 @@ def save_graph(graph, df, ear):
     """
 
     row = df.index[0]
+
     sub_long = df["Participant_ID"][row]
     sub_short = sub_long.lstrip("Sub")
+
     session = df["DATE"][row]
     name = df["Protocol name"][row]
     condition = df["Protocol condition"][row]
+
     folder = "../results/" + sub_long + "/"
+
     path = folder + "Sub-" + sub_short + "_" + session + "_" + name + ": " + condition + " (" + ear + ")" + ".html"
+
     graph.write_html(path)
+
     return True
 
 
@@ -57,7 +65,27 @@ def return_130(df, to_search):
             to_drop.append(to_search.index(i))
         else:
             continue
+
     return to_drop
+
+
+def generate_title(df, ear):
+    """
+    INPUTS
+    -df: dataframe with the informations to generate the title
+    -ear: ear side linked with the title
+    OUTPUTS
+    -returns a string to use as a title for the graph to generate
+    """
+
+    row = df.index[0]
+    ID = df["Participant_ID"][row]
+    name = df["Protocol name"][row]
+    condition = df["Protocol condition"][row]
+
+    title = ID + " - " + name + ": " + condition + " (" + ear +")"
+
+    return title
 
 
 def plot_pta_L(df):
@@ -65,6 +93,7 @@ def plot_pta_L(df):
     INPUTS
     -df: pandas dataframe containing the data to plot
     OUTPUTS
+    -saves pta graphs in .html
     """
 
     column_names = df.columns
@@ -91,14 +120,11 @@ def plot_pta_L(df):
         if k.startswith("LE_"):
             x.append(int(k.lstrip("LE_")))
             y.append(df[k][row])
-
         else:
             continue
 
-    ID = df["Participant_ID"][row]
-    name = df["Protocol name"][row]
-    condition = df["Protocol condition"][row]
-    title = ID + " - " + name + ": " + condition + " (Left Ear)"
+    title = generate_title(df, "Left Ear")
+
     labels = {"title": title, "x": "Frequency (Hz)", "y": "Hearing Threshold (dB HL)"}
 
     fig = go.Figure()
@@ -122,9 +148,9 @@ def plot_pta_L(df):
                       yaxis_zeroline = True,
                       yaxis_zerolinewidth = 1,
                       yaxis_zerolinecolor = "black")
-    #fig.show()
 
     completed = save_graph(fig, df, "Left Ear")
+
     if completed == True:
         return True
     else:
@@ -136,6 +162,7 @@ def plot_pta_R(df):
     INPUTS
     -df: pandas dataframe containing the data to plot
     OUTPUTS
+    -saves pta graphs in .html
     """
 
     column_names = df.columns
@@ -165,10 +192,8 @@ def plot_pta_R(df):
         else:
             continue
 
-    ID = df["Participant_ID"][row]
-    name = df["Protocol name"][row]
-    condition = df["Protocol condition"][row]
-    title = ID + " - " + name + ": " + condition + " (Right Ear)"
+    title = generate_title(df, "Right Ear")
+
     labels = {"title": title, "x": "Frequency (Hz)", "y": "Hearing Threshold (dB HL)"}
 
     fig = go.Figure()
@@ -192,9 +217,9 @@ def plot_pta_R(df):
                       yaxis_zeroline = True,
                       yaxis_zerolinewidth = 1,
                       yaxis_zerolinecolor = "black")
-    #fig.show()
 
     completed = save_graph(fig, df, "Right Ear")
+
     if completed == True:
         return True
     else:
