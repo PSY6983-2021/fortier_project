@@ -1,6 +1,7 @@
 import numpy as np
 import pandas as pd
 import plotly.express as px
+import plotly.graph_objects as go
 
 def eliminate_row(df, column_to_search, value_to_search):
     """
@@ -33,6 +34,7 @@ def eliminate_row(df, column_to_search, value_to_search):
     #return df.drop(to_drop, axis = 0)
     return df
 
+"""
 def make_sub_df(df, columns, row, test_type):
     pta_x = [250, 500, 1000, 2000,
              3000, 4000, 6000, 8000,
@@ -49,43 +51,38 @@ def make_sub_df(df, columns, row, test_type):
         x = pta_x
     elif test_type == "mtx":
         x = mtx_x
+"""
 
-def drop_130(df, prefix):
-    column_names = df.columns
+def return_130(df, to_search):
     index_value = df.index[0]
     to_drop = []
-    to_search = []
     #print(column_names)
     #print("index = ", index_value)
     #print(len(df))
 
-    for i in column_names:
+    for i in to_search:
         #print(i)
-        if i.startswith(prefix):
-            to_search.append(i)
-        else:
-            continue
-    #print(to_search)
-
-    for j in to_search:
-        #print(j)
-        #print(df[j])
-        #print(df[j][index_value])
+        #print(df[i])
+        #print(df[i][index_value])
         #print(to_drop)
-        #print(df[column_to_search][j])
-        #print(df[column_to_search][j] == value_to_search)
-        if df[j][index_value] == 130:
+        #print(df[column_to_search][i])
+        #print(df[column_to_search][i] == value_to_search)
+        if df[i][index_value] == 130:
             #print(True)
-            to_drop.append(j)
+            to_drop.append(to_search.index(i))
         else:
             #print(False)
             continue
 
-    print(to_drop)
-    print(df)
-    df = df.drop(to_drop, axis = 1)
-    print(df)
-    return df
+    #print(to_drop)
+    #print(df)
+    #to_search_int = to_search_int.drop(to_drop, axis = 1)
+    return to_drop
+
+#def drop_130(data, list_130):
+    #for j in list_130:
+        #print(.columns[j])
+        #df = df.drop(df.columns(j), axis = 1)
 
 def plot_pta_L(df):
     """
@@ -94,43 +91,63 @@ def plot_pta_L(df):
     OUTPUTS
     """
 
-    #print(df)
+    column_names = df.columns
+    row = df.index[0]
+    to_search = []
+    x = []
+    y = []
 
-    df = drop_130(df, "LE_")
+    for i in column_names:
+        if i.startswith("LE_"):
+            to_search.append(i)
+        else:
+            continue
 
-    #i = 0
-    #data_y = df.loc[i, x_columns]
-    #data_y = data_y.reset_index(drop = True)
-    #data_y.columns = ["Hearing Threshold (dB HL)"]
-    #print(data_y)
-    #data_x = pd.DataFrame(data = [250, 500, 1000, 2000, 3000, 4000, 6000, 8000,
-    #                              9000, 10000, 11200, 12500, 14000, 16000, 18000, 20000])
-    #print(data_x)
-    #data = data_x.append(data_y)
-    #data.columns = ["Frequency (Hz)", "Hearing Threshold (dB HL)"]
-    #print(data)
-    #print(data.columns)
-    #data.to_csv("../results/data_test.csv")
-    #to_drop = []
-    #print(data.index)
-    #for j in data.index:
-        #print(j)
-        #print(to_drop)
-        #print(data.index[j])
-        #print(df[column_to_search][i])
-        #print(df[column_to_search][i] == value_to_search)
-        #if data[j] == 130:
-            #to_drop.append(j)
-        #else:
-            #continue
-    #print(to_drop)
-    #data = data.drop(to_drop, axis = 0)
-    #print(data)
-    #return df.drop(to_drop, axis = 0)
-    #ID = df["Participant_ID"][i]
-    #name = df["Protocol name"][i]
-    #title = ID + "-" + name + " (" + ear + ")"
-    #labels = {index: "Frequency (Hz)", value: "Hearing Threshold (dB HL)"}
-    #fig = px.line(data, title = title, log_x = True, range_x = [100, 20000], range_y = [-20, 80])
-    #fig.show()
+    list_130 = return_130(df, to_search)
+
+    for j in list_130:
+        to_remove = to_search[j]
+        df = df.drop(to_remove, axis = 1)
+
+    column_names = df.columns
+
+    for k in column_names:
+        if k.startswith("LE_"):
+            x.append(int(k.lstrip("LE_")))
+            y.append(df[k][row])
+
+        else:
+            continue
+
+    ID = df["Participant_ID"][row]
+    name = df["Protocol name"][row]
+    condition = df["Protocol condition"][row]
+    title = ID + " -- " + name + ": " + condition + " (Left Ear)"
+    labels = {"title": title, "x": "Frequency (Hz)", "y": "Hearing Threshold (dB HL)"}
+
+    fig = go.Figure()
+    fig.add_trace(go.Scatter(x = x,
+                             y = y,
+                             line_color = "blue",
+                             mode = 'lines+markers',
+                             name = title,
+                             hovertemplate = "%{x:1.0f} Hz<br>" +
+                                             "%{y:1.0f} dB HL"))
+    fig.update_layout(title = labels["title"],
+                      xaxis_title = labels["x"],
+                      yaxis_title = labels["y"],
+                      xaxis_type = "log",
+                      xaxis_range = [np.log10(100), np.log10(20000)],
+                      yaxis_range = [80, -20],
+                      xaxis_showline = True,
+                      xaxis_linecolor = "black",
+                      yaxis_showline = True,
+                      yaxis_linecolor = "black",
+                      yaxis_zeroline = True,
+                      yaxis_zerolinewidth = 1,
+                      yaxis_zerolinecolor = "black")
+    fig.show()
+
+
+
     #fig.write_image("../results/" + title + ".png")

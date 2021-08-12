@@ -94,8 +94,8 @@ if __name__ == "__main__":
 
     #print(data_pta_L)
 
-    for i in range (0, len(data_pta_L)):
-        print(i)
+    for i in range (22, 24): # range must be correct to "(0, len(data_pta_L))" when the development will be done
+        #print(i)
         #print(data_pta_L.loc[[i]])
         action_i = of.plot_pta_L(data_pta_L.loc[[i]])
         if action_i == True:
