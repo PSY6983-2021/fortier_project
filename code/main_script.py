@@ -6,6 +6,7 @@ if __name__ == "__main__":
     url_share = "https://docs.google.com/spreadsheets/d/1UQsU6FNr7ovVjLRIMItgtYWr1zN7UHpMjfHtdGa1myc/edit#gid=0"
     url_csv =  url_share.replace("/edit#gid=", "/export?format=csv&gid=")
     master_data = pd.read_csv(url_csv)
+    subjects = ["Sub01", "Sub02", "Sub03", "Sub04", "Sub05", "Sub06"]
 
     data_pta = master_data[["Participant_ID", "DATE", "Protocol name",
                             "Protocol condition", "Scan type",
@@ -65,6 +66,7 @@ if __name__ == "__main__":
     save_error = 0
 
     # Generation of the interactive graphs (.html file format)
+    # PTA, Left ear
     for i in range (0, len(data_pta_L)):
         action_i = of.plot_pta_L(data_pta_L.loc[[i]])
         if action_i == True:
@@ -72,6 +74,7 @@ if __name__ == "__main__":
         else:
             save_error = save_error + 1
 
+    # PTA, Right ear
     for j in range (0, len(data_pta_R)):
         action_j = of.plot_pta_R(data_pta_R.loc[[j]])
         if action_j == True:
@@ -79,14 +82,17 @@ if __name__ == "__main__":
         else:
             save_error = save_error + 1
 
-    """
-    for k in range (0, len(data_pta)):
-        action_k = of.plot_pta_(data_pta[k])
-        if action_k == True:
-            counter = counter + 1
-        else:
-            save_error = save_error + 1
+    # PTA, All results for one participant on one graph
+    #for k in subjects:
+    """The alignment must be corrected to genaralize to all subjects"""
+    one_subject = of.extract_subject(data_pta, "Sub01") # "Sub01" must be replaced with k
+    action_k = of.plot_pta_subject(one_subject)
+    if action_k == True:
+        counter = counter + 1
+    else:
+        save_error = save_error + 1
 
+    """
     for m in range (0, len(data_mtx)):
         action_m = of.plot_mtx(data_mtx[m])
         if action_m == True:
