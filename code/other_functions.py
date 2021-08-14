@@ -27,6 +27,21 @@ def eliminate_row(df, column_to_search, value_to_search):
     return df
 
 
+def extract_subject(df, subject):
+    """
+    INPUTS
+    -df: dataframe containing all the tests
+    -subject: ID of the participant to isolate
+    OUTPUTS
+    -returns a dataframe containing only the sessions linked to the ID provided
+    """
+
+    mask = df["Participant_ID"] == subject
+    df_sub = df[mask].reset_index(drop = True)
+
+    return df_sub
+
+
 def save_graph(graph, df, ear):
     """
     INPUTS
@@ -88,22 +103,16 @@ def generate_title(df, ear):
     return title
 
 
-def plot_pta_L(df):
-    """
-    INPUTS
-    -df: pandas dataframe containing the data to plot
-    OUTPUTS
-    -saves pta graphs in .html
-    """
-
+def data_to_plot(df, prefix):
     column_names = df.columns
     row = df.index[0]
+    #print(len(df))
     to_search = []
     x = []
     y = []
 
     for i in column_names:
-        if i.startswith("LE_"):
+        if i.startswith(prefix):
             to_search.append(i)
         else:
             continue
@@ -117,11 +126,26 @@ def plot_pta_L(df):
     column_names = df.columns
 
     for k in column_names:
-        if k.startswith("LE_"):
-            x.append(int(k.lstrip("LE_")))
+        if k.startswith(prefix):
+            x.append(int(k.lstrip(prefix)))
             y.append(df[k][row])
         else:
             continue
+
+    #print("x:", x)
+    #print("y:", y)
+    return x, y
+
+
+def plot_pta_L(df):
+    """
+    INPUTS
+    -df: pandas dataframe containing the data to plot
+    OUTPUTS
+    -saves pta graphs in .html
+    """
+
+    x, y = data_to_plot(df, "LE_")
 
     title = generate_title(df, "Left Ear")
 
@@ -165,32 +189,7 @@ def plot_pta_R(df):
     -saves pta graphs in .html
     """
 
-    column_names = df.columns
-    row = df.index[0]
-    to_search = []
-    x = []
-    y = []
-
-    for i in column_names:
-        if i.startswith("RE_"):
-            to_search.append(i)
-        else:
-            continue
-
-    list_130 = return_130(df, to_search)
-
-    for j in list_130:
-        to_remove = to_search[j]
-        df = df.drop(to_remove, axis = 1)
-
-    column_names = df.columns
-
-    for k in column_names:
-        if k.startswith("RE_"):
-            x.append(int(k.lstrip("RE_")))
-            y.append(df[k][row])
-        else:
-            continue
+    x, y = data_to_plot(df, "RE_")
 
     title = generate_title(df, "Right Ear")
 
@@ -219,6 +218,56 @@ def plot_pta_R(df):
                       yaxis_zerolinecolor = "black")
 
     completed = save_graph(fig, df, "Right Ear")
+
+    if completed == True:
+        return True
+    else:
+        return False
+
+
+def plot_pta_subject(df):
+    """
+    INPUTS
+    -df: pandas dataframe containing the data to plot
+    OUTPUTS
+    -saves pta graph in .html
+    """
+
+    fig = go.Figure()
+
+    for i in range (0, len(df)):
+        run_R_x, run_L_y = data_to_plot(df.loc[[i]], "RE_")
+        run_L_x, run_L_y = data_to_plot(df.loc[[i]], "LE_")
+
+####
+
+        title = generate_title(df, "Right Ear")
+
+        labels = {"title": title, "x": "Frequency (Hz)", "y": "Hearing Threshold (dB HL)"}
+
+        fig.add_trace(go.Scatter(x = x,
+                                 y = y,
+                                 line_color = "red",
+                                 mode = 'lines+markers',
+                                 name = title,
+                                 hovertemplate = "%{x:1.0f} Hz<br>" +
+                                                 "%{y:1.0f} dB HL"))
+        fig.update_layout(title = labels["title"],
+                          xaxis_title = labels["x"],
+                          yaxis_title = labels["y"],
+                          xaxis_type = "log",
+                          xaxis_range = [np.log10(100), np.log10(20000)],
+                          yaxis_range = [80, -20],
+                          xaxis_showline = True,
+                          xaxis_linecolor = "black",
+                          yaxis_showline = True,
+                          yaxis_linecolor = "black",
+                          yaxis_zeroline = True,
+                          yaxis_zerolinewidth = 1,
+                          yaxis_zerolinecolor = "black")
+
+    fig.show()
+    #completed = save_graph(fig, df, "Right Ear")
 
     if completed == True:
         return True
