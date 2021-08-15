@@ -82,15 +82,14 @@ if __name__ == "__main__":
         else:
             save_error = save_error + 1
 
-    # PTA, All results for one participant on one graph
-    #for k in subjects:
-    """The alignment must be corrected to genaralize to all subjects"""
-    one_subject = of.extract_subject(data_pta, "Sub01") # "Sub01" must be replaced with k
-    action_k = of.plot_pta_subject(one_subject)
-    if action_k == True:
-        counter = counter + 1
-    else:
-        save_error = save_error + 1
+    # PTA, All results for one participant in one graph
+    for k in subjects:
+        one_subject = of.extract_subject(data_pta, k)
+        action_k = of.plot_pta_subject(one_subject)
+        if action_k == True:
+            counter = counter + 1
+        else:
+            save_error = save_error + 1
 
     """
     for m in range (0, len(data_mtx)):
