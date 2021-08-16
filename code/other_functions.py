@@ -42,6 +42,25 @@ def extract_subject(df, subject):
     return df_sub
 
 
+def extract_language(df, run_ID):
+    """
+    INPUTS
+    -df: one-line dataframe containing the tests
+    -run_ID: specifies if it is the first or second language
+    OUTPUTS
+    -returns the name of the language linked to the run_ID
+    """
+
+    row = df.index[0]
+
+    if run_ID == "L1":
+        language = df["MTX_LANG_1"][row]
+    elif run_ID == "L2":
+        language = df["MTX_LANG_2"][row]
+
+    return language
+
+
 def save_graph_PTA(graph, df, ear):
     """
     INPUTS
@@ -77,6 +96,41 @@ def save_graph_PTA(graph, df, ear):
     return True
 
 
+def save_graph_MTX(graph, df, language_ID):
+    """
+    INPUTS
+    -graph: interactive plotly.graph_objects figure
+    -df: dataframe with the informations that were used to generate the graph
+    -language_ID: specifies if it is the L1 or L2 and which language was used
+    OUTPUTS
+    -saves the graph in a .html file to a subject's specific location in the repository
+    """
+
+    test = "MTX"
+
+    row = df.index[0]
+
+    sub_long = df["Participant_ID"][row]
+    sub_short = sub_long.lstrip("Sub")
+
+    folder = "../results/" + sub_long + "/"
+    path_header = folder + "Sub-" + sub_short + "_" + test + "_"
+
+    if language_ID.endswith("_All_runs") == True:
+        path = path_header + language_ID + ".html"
+
+    else:
+        session = df["DATE"][row]
+        name = df["Protocol name"][row]
+        condition = df["Protocol condition"][row]
+
+        path = path_header + session + "_" + name + ": " + condition + " (" + language_ID + ")" + ".html"
+
+    graph.write_html(path)
+
+    return True
+
+
 def return_130(df, to_search):
 
     index_value = df.index[0]
@@ -101,8 +155,6 @@ def generate_title_graph(df, test):
 
     row = df.index[0]
     ID = df["Participant_ID"][row]
-    #name = df["Protocol name"][row]
-    #condition = df["Protocol condition"][row]
 
     if test == "PTA":
         title = ID + " - " + "Pure-Tone Audiometry"
@@ -114,7 +166,7 @@ def generate_title_graph(df, test):
     return title
 
 
-def generate_title_run(df, ear, index):
+def generate_title_run_PTA(df, ear, index):
     """
     INPUTS
     -df: dataframe with the informations to generate the title for a single run
@@ -123,20 +175,37 @@ def generate_title_run(df, ear, index):
     -returns a string to use as a title for the graph to generate
     """
 
-    #print(df)
     ID = df["Participant_ID"][index]
     name = df["Protocol name"][index]
     condition = df["Protocol condition"][index]
 
-    title = ID + " - " + name + ": " + condition + " (" + ear +")"
+    title = ID + " - " + "PTA, " + name + ": " + condition + " (" + ear +")"
 
     return title
 
 
-def data_to_plot(df, prefix):
+def generate_title_run_MTX(df, run_ID, index):
+    """
+    INPUTS
+    -df: dataframe with the informations to generate the title for a single run
+    -run_ID: indicates if it is the first or second language
+    OUTPUTS
+    -returns a string to use as a title for the graph to generate
+    """
+
+    ID = df["Participant_ID"][index]
+    name = df["Protocol name"][index]
+    condition = df["Protocol condition"][index]
+    language = run_ID + ": " + extract_language(df.loc[[index]], run_ID)
+
+    title = ID + " - " + "Matrix Test, " + name + ": " + condition + " (" + language +")"
+
+    return title
+
+
+def data_to_plot_PTA(df, prefix):
     column_names = df.columns
     row = df.index[0]
-    #print(len(df))
     to_search = []
     x = []
     y = []
@@ -162,8 +231,27 @@ def data_to_plot(df, prefix):
         else:
             continue
 
-    #print("x:", x)
-    #print("y:", y)
+    return x, y
+
+
+def data_to_plot_MTX(df, prefix):
+    column_names = df.columns
+    row = df.index[0]
+    to_search = []
+    x = ["Noise: Left<br>Speech: Left",
+         "Noise: Binaural<br>Speech: Left",
+         "Noise: Binaural<br>Speech: Binaural",
+         "Noise: Binaural<br>Speech: Right",
+         "Noise: Right<br>Speech: Right"]
+    y = []
+
+    for i in column_names:
+        if i.startswith(prefix):
+            value = df[i][row].replace(",", ".")
+            y.append(float(value))
+        else:
+            continue
+
     return x, y
 
 
@@ -175,26 +263,18 @@ def plot_pta_L(df):
     -saves pta graphs in .html
     """
 
-    x, y = data_to_plot(df, "LE_")
-
-    title = generate_title_run(df, "Left Ear", df.index[0])
-
+    title = generate_title_run_PTA(df, "Left Ear", df.index[0])
     labels = {"title": title, "x": "Frequency (Hz)", "y": "Hearing Threshold (dB HL)"}
 
     fig = go.Figure()
-    fig.add_trace(go.Scatter(x = x,
-                             y = y,
-                             line_color = "blue",
-                             mode = 'lines+markers',
-                             name = labels["title"],
-                             hovertemplate = "%{x:1.0f} Hz<br>" +
-                                             "%{y:1.0f} dB HL"))
+
     fig.update_layout(title = labels["title"],
                       xaxis_title = labels["x"],
                       yaxis_title = labels["y"],
                       xaxis_type = "log",
                       xaxis_range = [np.log10(100), np.log10(20000)],
                       yaxis_range = [80, -20],
+                      yaxis_dtick = 10,
                       xaxis_showline = True,
                       xaxis_linecolor = "black",
                       yaxis_showline = True,
@@ -202,6 +282,16 @@ def plot_pta_L(df):
                       yaxis_zeroline = True,
                       yaxis_zerolinewidth = 1,
                       yaxis_zerolinecolor = "black")
+
+    x, y = data_to_plot_PTA(df, "LE_")
+
+    fig.add_trace(go.Scatter(x = x,
+                             y = y,
+                             line_color = "blue",
+                             mode = 'lines+markers',
+                             name = labels["title"],
+                             hovertemplate = "%{x:1.0f} Hz<br>" +
+                                             "%{y:1.0f} dB HL"))
 
     completed = save_graph_PTA(fig, df, "Left Ear")
 
@@ -219,26 +309,18 @@ def plot_pta_R(df):
     -saves pta graphs in .html
     """
 
-    x, y = data_to_plot(df, "RE_")
-
-    title = generate_title_run(df, "Right Ear", df.index[0])
-
+    title = generate_title_run_PTA(df, "Right Ear", df.index[0])
     labels = {"title": title, "x": "Frequency (Hz)", "y": "Hearing Threshold (dB HL)"}
 
     fig = go.Figure()
-    fig.add_trace(go.Scatter(x = x,
-                             y = y,
-                             line_color = "red",
-                             mode = 'lines+markers',
-                             name = labels["title"],
-                             hovertemplate = "%{x:1.0f} Hz<br>" +
-                                             "%{y:1.0f} dB HL"))
+
     fig.update_layout(title = labels["title"],
                       xaxis_title = labels["x"],
                       yaxis_title = labels["y"],
                       xaxis_type = "log",
                       xaxis_range = [np.log10(100), np.log10(20000)],
                       yaxis_range = [80, -20],
+                      yaxis_dtick = 10,
                       xaxis_showline = True,
                       xaxis_linecolor = "black",
                       yaxis_showline = True,
@@ -246,6 +328,16 @@ def plot_pta_R(df):
                       yaxis_zeroline = True,
                       yaxis_zerolinewidth = 1,
                       yaxis_zerolinecolor = "black")
+
+    x, y = data_to_plot_PTA(df, "RE_")
+
+    fig.add_trace(go.Scatter(x = x,
+                             y = y,
+                             line_color = "red",
+                             mode = 'lines+markers',
+                             name = labels["title"],
+                             hovertemplate = "%{x:1.0f} Hz<br>" +
+                                             "%{y:1.0f} dB HL"))
 
     completed = save_graph_PTA(fig, df, "Right Ear")
 
@@ -274,6 +366,7 @@ def plot_pta_subject(df):
                       xaxis_type = "log",
                       xaxis_range = [np.log10(100), np.log10(20000)],
                       yaxis_range = [80, -20],
+                      yaxis_dtick = 10,
                       xaxis_showline = True,
                       xaxis_linecolor = "black",
                       yaxis_showline = True,
@@ -283,11 +376,11 @@ def plot_pta_subject(df):
                       yaxis_zerolinecolor = "black")
 
     for i in range (0, len(df)):
-        run_R_x, run_R_y = data_to_plot(df.loc[[i]], "RE_")
-        run_L_x, run_L_y = data_to_plot(df.loc[[i]], "LE_")
+        run_R_x, run_R_y = data_to_plot_PTA(df.loc[[i]], "RE_")
+        run_L_x, run_L_y = data_to_plot_PTA(df.loc[[i]], "LE_")
 
-        title_run_R = generate_title_run(df, "Right Ear", i)
-        title_run_L = generate_title_run(df, "Left Ear", i)
+        title_run_R = generate_title_run_PTA(df, "Right Ear", i)
+        title_run_L = generate_title_run_PTA(df, "Left Ear", i)
 
         fig.add_trace(go.Scatter(x = run_R_x,
                                  y = run_R_y,
@@ -305,9 +398,113 @@ def plot_pta_subject(df):
                                  hovertemplate = "%{x:1.0f} Hz<br>" +
                                                  "%{y:1.0f} dB HL"))
 
-
-    #fig.show()
     completed = save_graph_PTA(fig, df, "All_runs")
+
+    if completed == True:
+        return True
+    else:
+        return False
+
+def plot_mtx(df, run_ID):
+    """
+    INPUTS
+    -df: pandas dataframe containing the data to plot
+    -run_ID: specifies if it is the first or second language
+    OUTPUTS
+    -saves mtx graphs in .html
+    """
+    if run_ID == "L1":
+        prefix = "MTX1_"
+    elif run_ID == "L2":
+        prefix = "MTX2_"
+
+    language = extract_language(df, run_ID)
+    language_ID = run_ID + ": " + language
+    title = generate_title_run_MTX(df, run_ID, df.index[0])
+    labels = {"title": title, "x": "Test Condition", "y": "50% Comprehension Threshold (dB)"}
+
+    fig = go.Figure()
+
+    fig.update_layout(title = labels["title"],
+                      xaxis_title = labels["x"],
+                      yaxis_title = labels["y"],
+                      yaxis_range = [-15, 5],
+                      yaxis_dtick = 5,
+                      xaxis_showline = True,
+                      xaxis_linecolor = "black",
+                      yaxis_showline = True,
+                      yaxis_linecolor = "black",
+                      yaxis_zeroline = True,
+                      yaxis_zerolinewidth = 1,
+                      yaxis_zerolinecolor = "black")
+
+    x, y = data_to_plot_MTX(df, prefix)
+
+    fig.add_trace(go.Scatter(x = x,
+                             y = y,
+                             mode = 'lines+markers',
+                             name = labels["title"],
+                             hovertemplate = "%{x}<br>" +
+                                             "%{y:0.1f} dB"))
+
+    completed = save_graph_MTX(fig, df, language_ID)
+
+    if completed == True:
+        return True
+    else:
+        return False
+
+
+def plot_mtx_subject(df, run_ID):
+    """
+    INPUTS
+    -df: pandas dataframe containing the data to plot
+    -run_ID: specifies if it is the first or second language
+    OUTPUTS
+    -saves mtx graphs in .html
+    """
+
+    if run_ID == "L1":
+        prefix = "MTX1_"
+    elif run_ID == "L2":
+        prefix = "MTX2_"
+
+    language_title = extract_language(df, run_ID)
+    language_ID_title = run_ID + ": " + language_title
+    language_ID_save = run_ID + "_" + language_title + "_All_runs"
+
+    title_graph = generate_title_graph(df, "MTX") + " (" + language_ID_title + ")"
+    labels = {"title": title_graph, "x": "Test Condition", "y": "50% Comprehension Threshold (dB)"}
+
+    fig = go.Figure()
+
+    fig.update_layout(title = labels["title"],
+                      xaxis_title = labels["x"],
+                      yaxis_title = labels["y"],
+                      yaxis_range = [-15, 5],
+                      yaxis_dtick = 5,
+                      xaxis_showline = True,
+                      xaxis_linecolor = "black",
+                      yaxis_showline = True,
+                      yaxis_linecolor = "black",
+                      yaxis_zeroline = True,
+                      yaxis_zerolinewidth = 1,
+                      yaxis_zerolinecolor = "black")
+
+    for i in range (0, len(df)):
+        x, y = data_to_plot_MTX(df.loc[[i]], prefix)
+
+        title_run = generate_title_run_MTX(df, run_ID, i)
+        print(title_run)
+
+        fig.add_trace(go.Scatter(x = x,
+                                 y = y,
+                                 mode = 'lines+markers',
+                                 name = title_run,
+                                 hovertemplate = "%{x}<br>" +
+                                                 "%{y:0.1f} dB"))
+
+    completed = save_graph_MTX(fig, df, language_ID_save)
 
     if completed == True:
         return True
