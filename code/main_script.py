@@ -2,9 +2,11 @@ import pandas as pd
 import other_functions as of
 
 if __name__ == "__main__":
-    #url_share = input("Please input the URL of the Google Spreadsheet data file: ")
-    url_share = "https://docs.google.com/spreadsheets/d/1UQsU6FNr7ovVjLRIMItgtYWr1zN7UHpMjfHtdGa1myc/edit#gid=0"
-    url_csv =  url_share.replace("/edit#gid=", "/export?format=csv&gid=")
+    # url_share = input("Please input the URL of the Google "\
+    #                   "Spreadsheet data file: ")
+    url_share = "https://docs.google.com/spreadsheets/d/1UQsU6FNr7ovVjLRIMIt"\
+                "gtYWr1zN7UHpMjfHtdGa1myc/edit#gid=0"
+    url_csv = url_share.replace("/edit#gid=", "/export?format=csv&gid=")
     master_data = pd.read_csv(url_csv)
     subjects = ["Sub01", "Sub02", "Sub03", "Sub04", "Sub05", "Sub06"]
 
@@ -53,25 +55,55 @@ if __name__ == "__main__":
     # Elimination of the lines that are irrelevant to each of the tests:
     # Matrix speech perception test
     # L1
-    data_mtx_L1 = of.eliminate_row(data_mtx_L1, "Protocol name", "Baseline 1")
-    data_mtx_L1 = of.eliminate_row(data_mtx_L1, "Protocol condition", "Condition 3A (OAEs right before the scan)")
-    data_mtx_L1 = of.eliminate_row(data_mtx_L1, "Protocol condition", "Supplementary PTA test (Baseline)")
-    data_mtx_L1 = of.eliminate_row(data_mtx_L1, "Protocol condition", "Suppl. PTA test (right before the scan)")
-    data_mtx_L1 = of.eliminate_row(data_mtx_L1, "Protocol condition", "Suppl. PTA test (right after the scan)")
+    data_mtx_L1 = of.eliminate_row(data_mtx_L1,
+                                   "Protocol name",
+                                   "Baseline 1")
+    data_mtx_L1 = of.eliminate_row(data_mtx_L1,
+                                   "Protocol condition",
+                                   "Condition 3A (OAEs right before the scan)")
+    data_mtx_L1 = of.eliminate_row(data_mtx_L1,
+                                   "Protocol condition",
+                                   "Supplementary PTA test (Baseline)")
+    data_mtx_L1 = of.eliminate_row(data_mtx_L1,
+                                   "Protocol condition",
+                                   "Suppl. PTA test (right before the scan)")
+    data_mtx_L1 = of.eliminate_row(data_mtx_L1,
+                                   "Protocol condition",
+                                   "Suppl. PTA test (right after the scan)")
 
     # L2
-    data_mtx_L2 = of.eliminate_row(data_mtx_L2, "Protocol name", "Baseline 1")
-    data_mtx_L2 = of.eliminate_row(data_mtx_L2, "Protocol condition", "Condition 1A (right before the scan)")
-    data_mtx_L2 = of.eliminate_row(data_mtx_L2, "Protocol condition", "Condition 1B (right after the scan)")
-    data_mtx_L2 = of.eliminate_row(data_mtx_L2, "Protocol condition", "Condition 3A (OAEs right before the scan)")
-    data_mtx_L2 = of.eliminate_row(data_mtx_L2, "Protocol condition", "Supplementary PTA test (Baseline)")
-    data_mtx_L2 = of.eliminate_row(data_mtx_L2, "Protocol condition", "Suppl. PTA test (right before the scan)")
-    data_mtx_L2 = of.eliminate_row(data_mtx_L2, "Protocol condition", "Suppl. PTA test (right after the scan)")
+    data_mtx_L2 = of.eliminate_row(data_mtx_L2,
+                                   "Protocol name",
+                                   "Baseline 1")
+    data_mtx_L2 = of.eliminate_row(data_mtx_L2,
+                                   "Protocol condition",
+                                   "Condition 1A (right before the scan)")
+    data_mtx_L2 = of.eliminate_row(data_mtx_L2,
+                                   "Protocol condition",
+                                   "Condition 1B (right after the scan)")
+    data_mtx_L2 = of.eliminate_row(data_mtx_L2,
+                                   "Protocol condition",
+                                   "Condition 3A (OAEs right before the scan)")
+    data_mtx_L2 = of.eliminate_row(data_mtx_L2,
+                                   "Protocol condition",
+                                   "Supplementary PTA test (Baseline)")
+    data_mtx_L2 = of.eliminate_row(data_mtx_L2,
+                                   "Protocol condition",
+                                   "Suppl. PTA test (right before the scan)")
+    data_mtx_L2 = of.eliminate_row(data_mtx_L2,
+                                   "Protocol condition",
+                                   "Suppl. PTA test (right after the scan)")
 
     # Pure-tone audiometry
-    data_pta = of.eliminate_row(data_pta, "Protocol condition", "Condition 3A (OAEs right before the scan)")
-    data_pta_L = of.eliminate_row(data_pta_L, "Protocol condition", "Condition 3A (OAEs right before the scan)")
-    data_pta_R = of.eliminate_row(data_pta_R, "Protocol condition", "Condition 3A (OAEs right before the scan)")
+    data_pta = of.eliminate_row(data_pta,
+                                "Protocol condition",
+                                "Condition 3A (OAEs right before the scan)")
+    data_pta_L = of.eliminate_row(data_pta_L,
+                                  "Protocol condition",
+                                  "Condition 3A (OAEs right before the scan)")
+    data_pta_R = of.eliminate_row(data_pta_R,
+                                  "Protocol condition",
+                                  "Condition 3A (OAEs right before the scan)")
 
     # Counter initialisation to keep track of the amount of files generated
     counter = 0
@@ -79,17 +111,17 @@ if __name__ == "__main__":
 
     # Generation of the interactive graphs (.html file format)
     # PTA, Left ear
-    for i in range (0, len(data_pta_L)):
+    for i in range(0, len(data_pta_L)):
         action_i = of.plot_pta_L(data_pta_L.loc[[i]])
-        if action_i == True:
+        if action_i is True:
             counter = counter + 1
         else:
             save_error = save_error + 1
 
     # PTA, Right ear
-    for j in range (0, len(data_pta_R)):
+    for j in range(0, len(data_pta_R)):
         action_j = of.plot_pta_R(data_pta_R.loc[[j]])
-        if action_j == True:
+        if action_j is True:
             counter = counter + 1
         else:
             save_error = save_error + 1
@@ -98,27 +130,27 @@ if __name__ == "__main__":
     for k in subjects:
         one_subject = of.extract_subject(data_pta, k)
         action_k = of.plot_pta_subject(one_subject)
-        if action_k == True:
+        if action_k is True:
             counter = counter + 1
         else:
             save_error = save_error + 1
 
     # MTX, L1
-    for m in range (0, len(data_mtx_L1)):
+    for m in range(0, len(data_mtx_L1)):
         action_m = of.plot_mtx(data_mtx_L1.loc[[m]], "L1")
-        if action_m == True:
+        if action_m is True:
             counter = counter + 1
         else:
             save_error = save_error + 1
 
     # MTX, L2
-    for n in range (0, len(data_mtx_L2)):
+    for n in range(0, len(data_mtx_L2)):
         df_line = data_mtx_L2.loc[[n]]
         if df_line["Participant_ID"][n] == "Sub06":
             continue
         else:
             action_n = of.plot_mtx(data_mtx_L2.loc[[n]], "L2")
-            if action_n == True:
+            if action_n is True:
                 counter = counter + 1
             else:
                 save_error = save_error + 1
@@ -127,7 +159,7 @@ if __name__ == "__main__":
     for p in subjects:
         one_subject = of.extract_subject(data_mtx_L1, p)
         action_p = of.plot_mtx_subject(one_subject, "L1")
-        if action_p == True:
+        if action_p is True:
             counter = counter + 1
         else:
             save_error = save_error + 1
@@ -135,12 +167,11 @@ if __name__ == "__main__":
     # MTX, L2, All results for one participant in one graph
     for q in subjects:
         if q == "Sub06":
-              continue
+            continue
         else:
             one_subject = of.extract_subject(data_mtx_L2, q)
-            print(one_subject)
             action_q = of.plot_mtx_subject(one_subject, "L2")
-            if action_q == True:
+            if action_q is True:
                 counter = counter + 1
             else:
                 save_error = save_error + 1
