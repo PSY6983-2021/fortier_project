@@ -40,21 +40,33 @@ if __name__ == "__main__":
                               "LE_14000", "LE_16000", "LE_18000",
                               "LE_20000"]]
 
+    data_mtx_L1 = master_data[["Participant_ID", "DATE", "Protocol name",
+                               "Protocol condition", "Scan type",
+                               "MTX_LANG_1", "MTX1_L_L", "MTX1_L_Bin",
+                               "MTX1_Bin_Bin", "MTX1_R_Bin", "MTX1_R_R"]]
 
-    data_mtx = master_data[["Participant_ID", "DATE", "Protocol name",
-                            "Protocol condition", "Scan type",
-                            "MTX_LANG_1", "MTX1_L_L", "MTX1_L_Bin",
-                            "MTX1_Bin_Bin", "MTX1_R_Bin", "MTX1_R_R",
-                            "MTX_LANG_2", "MTX2_L_L", "MTX2_L_Bin",
-                            "MTX2_Bin_Bin", "MTX2_R_Bin", "MTX2_R_R"]]
+    data_mtx_L2 = master_data[["Participant_ID", "DATE", "Protocol name",
+                               "Protocol condition", "Scan type",
+                               "MTX_LANG_2", "MTX2_L_L", "MTX2_L_Bin",
+                               "MTX2_Bin_Bin", "MTX2_R_Bin", "MTX2_R_R"]]
 
     # Elimination of the lines that are irrelevant to each of the tests:
     # Matrix speech perception test
-    data_mtx = of.eliminate_row(data_mtx, "Protocol name", "Baseline 1")
-    data_mtx = of.eliminate_row(data_mtx, "Protocol condition", "Condition 3A (OAEs right before the scan)")
-    data_mtx = of.eliminate_row(data_mtx, "Protocol condition", "Supplementary PTA test (Baseline)")
-    data_mtx = of.eliminate_row(data_mtx, "Protocol condition", "Supplementary PTA test (right before the scan)")
-    data_mtx = of.eliminate_row(data_mtx, "Protocol condition", "Supplementary PTA test (right after the scan)")
+    # L1
+    data_mtx_L1 = of.eliminate_row(data_mtx_L1, "Protocol name", "Baseline 1")
+    data_mtx_L1 = of.eliminate_row(data_mtx_L1, "Protocol condition", "Condition 3A (OAEs right before the scan)")
+    data_mtx_L1 = of.eliminate_row(data_mtx_L1, "Protocol condition", "Supplementary PTA test (Baseline)")
+    data_mtx_L1 = of.eliminate_row(data_mtx_L1, "Protocol condition", "Suppl. PTA test (right before the scan)")
+    data_mtx_L1 = of.eliminate_row(data_mtx_L1, "Protocol condition", "Suppl. PTA test (right after the scan)")
+
+    # L2
+    data_mtx_L2 = of.eliminate_row(data_mtx_L2, "Protocol name", "Baseline 1")
+    data_mtx_L2 = of.eliminate_row(data_mtx_L2, "Protocol condition", "Condition 1A (right before the scan)")
+    data_mtx_L2 = of.eliminate_row(data_mtx_L2, "Protocol condition", "Condition 1B (right after the scan)")
+    data_mtx_L2 = of.eliminate_row(data_mtx_L2, "Protocol condition", "Condition 3A (OAEs right before the scan)")
+    data_mtx_L2 = of.eliminate_row(data_mtx_L2, "Protocol condition", "Supplementary PTA test (Baseline)")
+    data_mtx_L2 = of.eliminate_row(data_mtx_L2, "Protocol condition", "Suppl. PTA test (right before the scan)")
+    data_mtx_L2 = of.eliminate_row(data_mtx_L2, "Protocol condition", "Suppl. PTA test (right after the scan)")
 
     # Pure-tone audiometry
     data_pta = of.eliminate_row(data_pta, "Protocol condition", "Condition 3A (OAEs right before the scan)")
@@ -91,14 +103,47 @@ if __name__ == "__main__":
         else:
             save_error = save_error + 1
 
-    """
-    for m in range (0, len(data_mtx)):
-        action_m = of.plot_mtx(data_mtx[m])
+    # MTX, L1
+    for m in range (0, len(data_mtx_L1)):
+        action_m = of.plot_mtx(data_mtx_L1.loc[[m]], "L1")
         if action_m == True:
             counter = counter + 1
         else:
             save_error = save_error + 1
-    """
+
+    # MTX, L2
+    for n in range (0, len(data_mtx_L2)):
+        df_line = data_mtx_L2.loc[[n]]
+        if df_line["Participant_ID"][n] == "Sub06":
+            continue
+        else:
+            action_n = of.plot_mtx(data_mtx_L2.loc[[n]], "L2")
+            if action_n == True:
+                counter = counter + 1
+            else:
+                save_error = save_error + 1
+
+    # MTX, L1, All results for one participant in one graph
+    for p in subjects:
+        one_subject = of.extract_subject(data_mtx_L1, p)
+        action_p = of.plot_mtx_subject(one_subject, "L1")
+        if action_p == True:
+            counter = counter + 1
+        else:
+            save_error = save_error + 1
+
+    # MTX, L2, All results for one participant in one graph
+    for q in subjects:
+        if q == "Sub06":
+              continue
+        else:
+            one_subject = of.extract_subject(data_mtx_L2, q)
+            print(one_subject)
+            action_q = of.plot_mtx_subject(one_subject, "L2")
+            if action_q == True:
+                counter = counter + 1
+            else:
+                save_error = save_error + 1
 
     # Return a feedback to the user regarding the number of files created
     if counter <= 1:
