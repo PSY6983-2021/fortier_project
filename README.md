@@ -137,7 +137,7 @@ These scripts were also linted using flake8 and passed all the generic requireme
 
 ##### Exemple of interactive HTML audiogram
 
-knitr::include_url("images/Sub-01_PTA_All_runs.html")
+htmltools::includeHTML("images/Sub-01_PTA_All_runs.html")
 
 ##### Exemple of Matrix test interactive HTML graph
 
