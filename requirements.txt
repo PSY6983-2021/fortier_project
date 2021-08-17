@@ -1,1 +1,3 @@
 pandas
+numpy
+plotly.graph_objects
