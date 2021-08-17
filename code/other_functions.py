@@ -380,7 +380,7 @@ def plot_pta_R(df):
         return False
 
 
-def plot_pta_subject(df):
+def plot_pta_subject(df, display = False):
     """
     INPUTS
     -df: pandas dataframe containing the data to plot
@@ -433,12 +433,15 @@ def plot_pta_subject(df):
                                  hovertemplate="%{x:1.0f} Hz<br>" +
                                                "%{y:1.0f} dB HL"))
 
-    completed = save_graph_PTA(fig, df, "All_runs")
-
-    if completed is True:
-        return True
+    if display is True:
+        fig.show()
     else:
-        return False
+        completed = save_graph_PTA(fig, df, "All_runs")
+
+        if completed is True:
+            return True
+        else:
+            return False
 
 
 def plot_mtx(df, run_ID):
@@ -493,7 +496,7 @@ def plot_mtx(df, run_ID):
         return False
 
 
-def plot_mtx_subject(df, run_ID):
+def plot_mtx_subject(df, run_ID, display = False):
     """
     INPUTS
     -df: pandas dataframe containing the data to plot
@@ -544,9 +547,12 @@ def plot_mtx_subject(df, run_ID):
                                  hovertemplate="%{x}<br>" +
                                                "%{y:0.1f} dB"))
 
-    completed = save_graph_MTX(fig, df, language_ID_save)
-
-    if completed is True:
-        return True
+    if display is True:
+        fig.show()
     else:
-        return False
+        completed = save_graph_MTX(fig, df, language_ID_save)
+
+        if completed is True:
+            return True
+        else:
+            return False
