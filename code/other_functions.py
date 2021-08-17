@@ -89,7 +89,8 @@ def save_graph_PTA(graph, df, ear):
         name = df["Protocol name"][row]
         condition = df["Protocol condition"][row]
 
-        path = path_header + session + "_" + name + ": " + condition + " (" + ear + ")" + ".html"
+        path = (path_header + session + "_" + name + ": " + condition
+                + " (" + ear + ")" + ".html")
 
     graph.write_html(path)
 
@@ -125,7 +126,8 @@ def save_graph_MTX(graph, df, language_ID):
         name = df["Protocol name"][row]
         condition = df["Protocol condition"][row]
 
-        path = path_header + session + "_" + name + ": " + condition + " (" + language_ID + ")" + ".html"
+        path = (path_header + session + "_" + name + ": " + condition + " ("
+                + language_ID + ")" + ".html")
 
     graph.write_html(path)
 
@@ -135,7 +137,8 @@ def save_graph_MTX(graph, df, language_ID):
 def return_130(df, to_search):
     """
     INPUTS
-    -df: takes a one row dataframe to scan for the value 130 (PTA's "no response" marker)
+    -df: takes a one row dataframe to scan for the value 130 (PTA's
+         "no response" marker)
     -to_search: list of column names in which the fct has to look in
     OUTPUTS
     -returns a list of the columns containing the value 130
@@ -208,7 +211,8 @@ def generate_title_run_MTX(df, run_ID, index):
     condition = df["Protocol condition"][index]
     language = run_ID + ": " + extract_language(df.loc[[index]], run_ID)
 
-    title = ID + " - " + "Matrix Test, " + name + ": " + condition + " (" + language + ")"
+    title = (ID + " - " + "Matrix Test, " + name + ": " + condition + " ("
+             + language + ")")
 
     return title
 
@@ -507,7 +511,8 @@ def plot_mtx_subject(df, run_ID):
     language_ID_title = run_ID + ": " + language_title
     language_ID_save = run_ID + "_" + language_title + "_All_runs"
 
-    title_graph = generate_title_graph(df, "MTX") + " (" + language_ID_title + ")"
+    title_graph = (generate_title_graph(df, "MTX") + " ("
+                   + language_ID_title + ")")
     labels = {"title": title_graph,
               "x": "Test Condition",
               "y": "50% Comprehension Threshold (dB)"}
