@@ -59,11 +59,11 @@ Some of those test data, such as the pure-tone audiometry test data, are more ea
 But with these repeated test comes important amount of data to process.
 A first task that could be interesting to do would be, in order to go through the data processing more efficiently, to build an automated pipeline to generate the graphs.
 
-###### Exemple of audiogram
+##### Exemple of audiogram
 
 ![P01-Baseline 2, Bilateral.png](images/P01-Baseline_2_Bilateral.png)
 
-###### Exemple of Matrix test results graph
+##### Exemple of Matrix test results graph
 
 ![P01-Matrix test FR, Condition 2 (may_2021).png](images/P01-Matrix_test_FR_Condition_2_(may_2021).png)
 
@@ -116,3 +116,29 @@ By the end of The BrainHack School, we aimed to have the following:
 - Jupyter notebooks with code and explanations for the BIDS formatting task
 - A [slideshow](https://docs.google.com/presentation/d/1TveZjzR9TDlGQA-XrLYjqPEb2E-x2vvl0kyfu43ljaQ/edit?usp=sharing) presentation showing the project results
  
+## Results
+
+#### Mr. Fortier's progress overview
+
+A first iteration of functional python scripts to generation single test graphs and test overview graphs for each of the Projet Courtois NeuroMod participants is now available in the code folder of this repository.
+These scripts were also linted using flake8 and passed all the generic requirements of this linter.
+
+#### Tools and skills that were developped during this project
+
+- **Python scripts**: It was a first attempt to code in python using scripts instead of the Jupyter Notebook controlled environment.
+- **Python scripts**: It was also a first attempt at using multiple scripts for a single task and importing functions across them.
+- **Git and Github**: This project is the first attempt at building a complete project from the start, using Git's functions and a Github repository.
+- **Plot.ly's `graph_objects` tools**: This project was a first on many front regarding Plot.ly.
+    - It was a first attempt at doing interactive figures/graphs.
+    - It was a first contact with Plot.ly's library.
+    - It was a challenge to be able to build graphs that fully represent the particularities of the two different types of figure produced in this project: `plotly.express` might have been easier to use than `plotly.graph_objects`, but it was not as capable to fully build the vision planned for this project.
+    - It was an important challenge to navigate in the impressive documentation of the `plotly.graph_objects` library. It is a powerful, extensively customizable tool, but it is also very complex.
+- **flake8 linter**: It was the first use of a linter to proof read the scripts' code format.
+
+##### Exemple of interactive HTML audiogram
+
+![Sub01-PTA, All runs](images/Sub-01_PTA_All_runs.html)
+
+##### Exemple of Matrix test interactive HTML graph
+
+![Sub01-Matrix test FR, All runs](images/Sub-01_MTX_L1_Francais_All_runs.html)
