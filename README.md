@@ -137,7 +137,12 @@ These scripts were also linted using flake8 and passed all the generic requireme
 
 ##### Exemple of interactive HTML audiogram
 
-htmltools::includeHTML("images/Sub-01_PTA_All_runs.html")
+<svg fill="none" viewBox="0 0 120 120" width="120" height="120" xmlns="images/Sub-01_PTA_All_runs.html">
+  <foreignObject width="100%" height="100%">
+    <div xmlns="images/Sub-01_PTA_All_runs.html">
+    </div>
+  </foreignObject>
+</svg>
 
 ##### Exemple of Matrix test interactive HTML graph
 
