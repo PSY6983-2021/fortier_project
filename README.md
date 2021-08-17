@@ -137,9 +137,10 @@ These scripts were also linted using flake8 and passed all the generic requireme
 
 ##### Exemple of interactive HTML audiogram
 
-<figure class="video_container">
-  <iframe src="images/Sub-01_PTA_All_runs.html"> </iframe>
-</figure>
+<div>
+  <iframe src="images/Sub-01_PTA_All_runs.html">
+  </iframe>
+</div>
 
 ##### Exemple of Matrix test interactive HTML graph
 
