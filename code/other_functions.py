@@ -133,6 +133,13 @@ def save_graph_MTX(graph, df, language_ID):
 
 
 def return_130(df, to_search):
+    """
+    INPUTS
+    -df: takes a one row dataframe to scan for the value 130 (PTA's "no response" marker)
+    -to_search: list of column names in which the fct has to look in
+    OUTPUTS
+    -returns a list of the columns containing the value 130
+    """
 
     index_value = df.index[0]
     to_drop = []
@@ -207,6 +214,14 @@ def generate_title_run_MTX(df, run_ID, index):
 
 
 def data_to_plot_PTA(df, prefix):
+    """
+    INPUTS
+    -df: one line dataframe from which this function extract the data to plot
+    -prefix: str marker pointing to the columns containing the relevant data
+    OUTPUTS
+    -returns two lists of data containing the x and y values to plot
+    """
+
     column_names = df.columns
     row = df.index[0]
     to_search = []
@@ -238,6 +253,14 @@ def data_to_plot_PTA(df, prefix):
 
 
 def data_to_plot_MTX(df, prefix):
+    """
+    INPUTS
+    -df: one line dataframe from which this function extracts the data to plot
+    -prefix: str marker pointing to the columns containing the relevant data
+    OUTPUTS
+    -returns two lists of data containing the x and y values to plot
+    """
+
     column_names = df.columns
     row = df.index[0]
     x = ["Noise: Left<br>Speech: Left",
