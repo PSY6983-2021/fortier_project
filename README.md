@@ -140,7 +140,6 @@ These scripts were also linted using flake8 and passed all the generic requireme
 <figure>
     <img src="./images/Sub-01_PTA_All_runs.html"
          alt="Sub01-PTA, All runs">
-    <figcaption>Sub01-PTA, All runs</figcaption>
 </figure>
 
 ##### Exemple of Matrix test interactive HTML graph
