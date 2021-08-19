@@ -127,6 +127,12 @@ By the end of The BrainHack School, we aimed to have the following:
  
 ## Results
 
+### Lili El Khalil's progress review
+
+#### Tools and skills that were developped during this project
+
+#### Deliverables
+
 ### Mr. Fortier's progress overview
 
 A first iteration of functional python scripts to generation single test graphs and test overview graphs for each of the Projet Courtois NeuroMod participants is now available in the code folder of this repository.
@@ -163,10 +169,6 @@ Unfortunately, it was not possible to create a machine learning task script on t
 ### Exemple of Matrix test interactive HTML graph
 
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/PSY6983-2021/fortier_project/HEAD?filepath=code%2FMTX_sample_figure_generator.ipynb)
-
-### Lili El Khalil's progress review
-
-#### Tools and skills that were developped during this project
 
 ## Conclusion
 
