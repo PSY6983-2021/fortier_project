@@ -129,9 +129,31 @@ By the end of The BrainHack School, we aimed to have the following:
 
 ### Lili El Khalil's progress review
 
+A script that helped in building a BIDS format for organizing our data. As I divided my data into subject, which are the participants. 
+Then for each subject the number of sessions they participated and in each session we have the four tests done. The four tests are : Tymp, Reflex, PTA and MTX. 
+At the lower level, in each test folders, you can find the results obtained for each run of the test. 
+
 #### Tools and skills that were developped during this project
 
+Many of these contribute in my part of the project:
+
+- <b>Jupyter Notebook</b>: an environment used to write the code
+- <b>Windows Subsystem for Linux/Bash</b>: Edit text files such as this README.md
+- <b>Python Libraries</b>: os, numpy and pandas
+- <b>Git</b>: Track file changes
+- <b>GitHub</b>: Organize team project
+
 #### Deliverables
+
+<b>Jupyter Notebook</b>
+
+The notebook contains the code used in order to be able to create BIDS compatible files from our data.
+
+![fortier_project_BIDS_structure.png](images/fortier_project_BIDS_structure.png)
+
+<b> README.md </b>
+
+This README.md file contains all the project details done by each one of us 
 
 ### Mr. Fortier's progress overview
 
