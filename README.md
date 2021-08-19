@@ -72,6 +72,11 @@ Since every person's hearing is unique and is affected by the individual auditor
 The third task that could be interesting to do is regarding the dataset formatting.
 Since the dataset is not currently BIDS compatible, it could be interesting to create a jupyter notebook to automatically create a BIDS format database from the data.
 
+##### Exemple of a BIDS compatible file structure reformatting
+(figure reference: Gorgolewski, K. J., Auer, T., Calhoun, V. D., Craddock, R. C., Das, S., Duff, E. P., Flandin, G., Ghosh, S. S., Glatard, T., Halchenko, Y. O., Handwerker, D. A., Hanke, M., Keator, D., Li, X., Michael, Z., Maumet, C., Nichols, B. N., Nichols, T. E., Pellman, J., … Poldrack, R. A. (2016). The brain imaging data structure, a format for organizing and describing outputs of neuroimaging experiments. *Scientific data*, *3*, 160044. https://doi.org/10.1038/sdata.2016.44)
+
+![Illustration of a BIDS structured dataset](https://www.ncbi.nlm.nih.gov/pmc/articles/instance/4978148/bin/sdata201644-f1.gif)
+
 ## Tools
 
 The plan is to use the following tools from the BrainHack School's tutorials in this project:
