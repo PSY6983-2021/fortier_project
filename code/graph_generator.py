@@ -44,12 +44,12 @@ if __name__ == "__main__":
 
     data_mtx_L1 = master_data[["Participant_ID", "DATE", "Protocol name",
                                "Protocol condition", "Scan type",
-                               "MTX_LANG_1", "MTX1_L_L", "MTX1_L_Bin",
+                               "MTX1_LANG", "MTX1_L_L", "MTX1_L_Bin",
                                "MTX1_Bin_Bin", "MTX1_R_Bin", "MTX1_R_R"]]
 
     data_mtx_L2 = master_data[["Participant_ID", "DATE", "Protocol name",
                                "Protocol condition", "Scan type",
-                               "MTX_LANG_2", "MTX2_L_L", "MTX2_L_Bin",
+                               "MTX2_LANG", "MTX2_L_L", "MTX2_L_Bin",
                                "MTX2_Bin_Bin", "MTX2_R_Bin", "MTX2_R_R"]]
 
     # Elimination of the lines that are irrelevant to each of the tests:
