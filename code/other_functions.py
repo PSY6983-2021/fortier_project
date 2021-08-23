@@ -53,9 +53,9 @@ def extract_language(df, run_ID):
     row = df.index[0]
 
     if run_ID == "L1":
-        language = df["MTX_LANG_1"][row]
+        language = df["MTX1_LANG"][row]
     elif run_ID == "L2":
-        language = df["MTX_LANG_2"][row]
+        language = df["MTX2_LANG"][row]
 
     return language
 
