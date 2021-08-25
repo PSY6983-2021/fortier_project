@@ -380,7 +380,7 @@ def plot_pta_R(df):
         return False
 
 
-def plot_pta_subject(df, display = False):
+def plot_pta_subject(df, display=False):
     """
     INPUTS
     -df: pandas dataframe containing the data to plot
@@ -497,7 +497,7 @@ def plot_mtx(df, run_ID):
         return False
 
 
-def plot_mtx_subject(df, run_ID, display = False):
+def plot_mtx_subject(df, run_ID, display=False):
     """
     INPUTS
     -df: pandas dataframe containing the data to plot

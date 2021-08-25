@@ -51,12 +51,12 @@ He is currently part of the auditory perception and protection branch of the Pro
 ## Project background
 
 The Projet Courtois NeuroMod is a longitudinal fMRI data acquisition project where participants get scanned almost every week.
-One risk associated with intensives protocols like this one is the chronic exposure of the participants to high noise levels during the scan sessions.
+One risk associated with intensive protocols like this one is the chronic exposure of the participants to high noise levels during the scan sessions.
 This is why it is important to regularly monitor their auditory health to ensure that the research protocol is not causing any damage to the participants' hearing.
-Part of the auditory perception's job is to do this monitoring task.
+Part of the auditory perception team's job is to do this monitoring task.
 To do so, the participants go through different clinical tests every month to keep track of the evolution of their auditory health.
-Some of those test data, such as the pure-tone audiometry test data, are more easily interpreted when rendered into graphic displays.
-But with these repeated test comes important amount of data to process.
+For some of these tests, such as the pure-tone audiometry test, the data is more easily interpreted when rendered into graphic displays.
+But with these repeated tests comes important amount of data to process.
 A first task that could be interesting to do would be, in order to go through the data processing more efficiently, to build an automated pipeline to generate the graphs.
 
 ### Exemple of audiogram
@@ -67,7 +67,7 @@ A first task that could be interesting to do would be, in order to go through th
 
 ![P01-Matrix test FR, Condition 2 (may_2021).png](images/P01-Matrix_test_FR_Condition_2_(may_2021).png)
 
-A second task that could be interesting to do would be to try and use these test data to try and fingerprint the participant based on their results to the tests.
+A second task that could be interesting to do would be to try and use this database to try and fingerprint the participants based on their results to the tests.
 Since every person's hearing is unique and is affected by the individual auditory experience, it could be interesting to try that kind of machine learning classification task.
 The third task that could be interesting to do is regarding the dataset formatting.
 Since the dataset is not currently BIDS compatible, it could be interesting to create a jupyter notebook to automatically create a BIDS format database from the data.
@@ -120,7 +120,7 @@ The specific dataset used for this project includes results from the tympanometr
 By the end of The BrainHack School, we aimed to have the following:
 
 - A README.md file to present the project
-- A GitHub repository documenting the project
+- A [GitHub repository](https://github.com/PSY6983-2021/fortier_project) documenting the project
 - Python scripts to create graphs and execute machine learning tasks
 - Jupyter notebooks with code and explanations for the BIDS formatting task
 - A [slideshow](https://docs.google.com/presentation/d/1TveZjzR9TDlGQA-XrLYjqPEb2E-x2vvl0kyfu43ljaQ/edit?usp=sharing) presentation showing the project results
@@ -161,7 +161,7 @@ A first iteration of functional python scripts to generation single test graphs 
 These scripts were also linted using flake8 and passed all the generic requirements of this linter.
 Unfortunately, it was not possible to create a machine learning task script on top of the graph generation scripts due to time constraint and restrictions linked to the collaborative nature of this project.
 
-#### Tools and skills that were developped during this project
+#### Tools/skills that were developped during this project (and challenges encountered...)
 
 - **Python scripts**: It was a first attempt to code in python using scripts instead of the Jupyter Notebook controlled environment.
 - **Python scripts**: It was also a first attempt at using multiple scripts for a single task and importing functions across them.
