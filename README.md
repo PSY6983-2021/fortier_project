@@ -198,4 +198,15 @@ Unfortunately, it was not possible to create a machine learning task script on t
 
 ## Conclusion
 
+In conclusion, most of the goals of this project were reached: only the machine learning task was left behind.
+This project includes:
+- a README.md file presenting the project
+- a LICENSE file
+- a requirements.txt file to be used by a Binder platform to run Jupyter Notebooks
+- two python scripts to generate interactive graph figures
+- two Jupyter Notebooks to be loaded using a Binder platform
+- one Jupyter Notebook to create and format a BIDS compatible dataset from the original dataset's spreadsheet format
+- images and html sample figures to be displayed by the README.md file
+
+We would like to thank the BrainHack School 2021 team of mentors for their availability and their help on this journey.
 
