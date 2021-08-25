@@ -95,7 +95,7 @@ The plan is to use the following tools from the BrainHack School's tutorials in 
 
 ## Data
 
-The dataset used for this project was acquired through multiple sessions with each participant between November 2018 and June 2021.
+The dataset used for this project was acquired through multiple sessions with each participant between November 2018 and August 2021.
 Multiple clinical tests were performed including:
 - Otoscopic inspection of the external auditory canal and tympanic membrane
 - Tympanometry
@@ -151,7 +151,7 @@ The notebook contains the code used in order to be able to create BIDS compatibl
 
 ![fortier_project_BIDS_structure.png](images/fortier_project_BIDS_structure.png)
 
-<b> README.md </b>
+<b>README.md</b>
 
 This README.md file contains all the project details done by each one of us 
 
@@ -186,11 +186,11 @@ Unfortunately, it was not possible to create a machine learning task script on t
 
 ### Exemple of interactive HTML audiogram
 
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/PSY6983-2021/fortier_project/HEAD?filepath=code%2FPTA_sample_figure_generator.ipynb)
+[![Binder](https://mybinder.org/badge_logo.svg)]("https://mybinder.org/v2/gh/PSY6983-2021/fortier_project/HEAD?filepath=code%2FPTA_sample_figure_generator.ipynb" target="_blank")
 
 ### Exemple of Matrix test interactive HTML graph
 
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/PSY6983-2021/fortier_project/HEAD?filepath=code%2FMTX_sample_figure_generator.ipynb)
+[![Binder](https://mybinder.org/badge_logo.svg)]("https://mybinder.org/v2/gh/PSY6983-2021/fortier_project/HEAD?filepath=code%2FMTX_sample_figure_generator.ipynb" target="_blank")
 
 ## Conclusion
 
