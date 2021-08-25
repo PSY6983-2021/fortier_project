@@ -29,7 +29,7 @@ My name is Lili El Khalil,
 I am in my first year of master student at University of Montreal studying psychology.
 I am a research assistant with Marie Audrey Lavoie in the visual neurocognition laboratory.
 
-<b> Why BrainHack School? </B>
+<b>Why BrainHack School?</B>
 
 When joining the BrainHack School, i was looking farward in particular to know more about data analyses and BIDS validation
 Which means to be able to analyse my research data results later on and to know how to validate it with BIDS.
