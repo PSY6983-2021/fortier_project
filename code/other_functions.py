@@ -459,6 +459,7 @@ def plot_mtx(df, run_ID):
 
     language = extract_language(df, run_ID)
     language_ID = run_ID + ": " + language
+    no_lang_df = df.drop(labels=f"{prefix}LANG", axis=1)
     title = generate_title_run_MTX(df, run_ID, df.index[0])
     labels = {"title": title,
               "x": "Test Condition",
@@ -479,7 +480,7 @@ def plot_mtx(df, run_ID):
                       yaxis_zerolinewidth=1,
                       yaxis_zerolinecolor="black")
 
-    x, y = data_to_plot_MTX(df, prefix)
+    x, y = data_to_plot_MTX(no_lang_df, prefix)
 
     fig.add_trace(go.Scatter(x=x,
                              y=y,
@@ -513,7 +514,7 @@ def plot_mtx_subject(df, run_ID, display = False):
     language_title = extract_language(df, run_ID)
     language_ID_title = run_ID + ": " + language_title
     language_ID_save = run_ID + "_" + language_title + "_All_runs"
-
+    no_lang_df = df.drop(labels=f"{prefix}LANG", axis=1)
     title_graph = (generate_title_graph(df, "MTX") + " ("
                    + language_ID_title + ")")
     labels = {"title": title_graph,
@@ -536,7 +537,7 @@ def plot_mtx_subject(df, run_ID, display = False):
                       yaxis_zerolinecolor="black")
 
     for i in range(0, len(df)):
-        x, y = data_to_plot_MTX(df.loc[[i]], prefix)
+        x, y = data_to_plot_MTX(no_lang_df.loc[[i]], prefix)
 
         title_run = generate_title_run_MTX(df, run_ID, i)
 
