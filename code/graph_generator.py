@@ -2,12 +2,7 @@ import pandas as pd
 import other_functions as of
 
 if __name__ == "__main__":
-    # url_share = input("Please input the URL of the Google "\
-    #                   "Spreadsheet data file: ")
-    url_share = "https://docs.google.com/spreadsheets/d/1UQsU6FNr7ovVjLRIMIt"\
-                "gtYWr1zN7UHpMjfHtdGa1myc/edit#gid=0"
-    url_csv = url_share.replace("/edit#gid=", "/export?format=csv&gid=")
-    master_data = pd.read_csv(url_csv)
+    master_data = pd.read_csv(of.retrieve_spreadsheet())
     subjects = ["Sub01", "Sub02", "Sub03", "Sub04", "Sub05", "Sub06"]
 
     data_pta = master_data[["Participant_ID", "DATE", "Protocol name",
