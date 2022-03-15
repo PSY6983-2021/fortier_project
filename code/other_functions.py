@@ -459,10 +459,10 @@ else:
         else:
             completed = save_graph_PTA(fig, df, "All_runs")
 
-        if completed is True:
-            return True
-        else:
-            return False
+            if completed is True:
+                return True
+            else:
+                return False
 
     def plot_mtx(df, run_ID):
         """
